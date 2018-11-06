@@ -1,0 +1,109 @@
+.xrm-network {
+	margin: 0px;
+}
+
+.network-controls {
+	text-align: left;
+	position: absolute; 
+	top: 30px; 	
+	left: 30px; 
+	padding: 5px; 
+	border: 1px solid #D6D6D6; 
+	z-index: 10000; 
+	background-color: rgba(255, 255, 255, 0.8); 
+	box-shadow: 0px 0px 1em black;		
+	width: 200px;	
+}
+
+.network-controls-progress {
+		font-size: 2px;
+		overflow: hidden;
+		color: #999;
+		height: 2px;
+		background-color: #f9f9f9;
+		margin-bottom: 2px;
+}
+
+.network-controls-title {
+	font-weight: bold;
+	border-bottom: 1px solid #eee;
+	padding: 2px;
+	margin-bottom: 4px;
+}
+
+.network-legend {
+	border: 1px solid #f3f3f3;
+	padding: 3px;	
+	background-color: rgba(255, 255, 255, 0.8); 	
+}
+
+.network-legend-item {
+	padding: 3px;
+}
+
+.network-legend-icon {
+	display: inline-block;
+	margin-right: 8px;
+	width: 1em;
+	vertical-align: text-top;
+}
+
+.network-legend-title {
+	display: inline-block;
+	max-width: 150px;	
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.network-controls-relationships {
+	max-height: 400px; 
+	overflow-y: scroll;
+	overflow-x: hidden;	
+}
+
+.network-title {
+	text-align: right;
+	position: absolute; 
+	bottom: 30px; 
+	right: 30px; 
+	padding: 5px; 
+	z-index: 10000; 
+	background-color: transparent; 
+	height: 21px; 
+	font-weight: bold;
+}
+
+.network-action {
+	padding: 5px;
+	cursor: default;
+	font-size: 110%;
+	cursor: pointer;
+	color: #666;	
+}
+
+.network-action:hover {
+	color: #111;
+}
+
+.network-control-row-head {
+	max-width: 160px;
+	overflow: hidden;
+    text-overflow: ellipsis;
+	margin-top: 5px;
+	border-bottom: 1px solid #eee;
+}
+
+.network-control-row {
+	max-width: 160px;
+	overflow: hidden;
+    text-overflow: ellipsis;	
+}
+
+.network-entity-label {
+
+}
+
+.network-entity-label-head {
+	font-weight: bold;
+}

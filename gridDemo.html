@@ -1,0 +1,163 @@
+<html>
+	<head>
+		<title>Xrm Grid Examples</title>
+		<link rel="stylesheet" type="text/css" href="../../_common/styles/fonts.css.aspx">
+		<link rel="stylesheet" type="text/css" href="../../_common/styles/global.css.aspx">	
+		<link rel="stylesheet" type="text/css" href="./css/XrmGrid.css">			
+
+		<script type="text/javascript" src="./js/ajax.js"></script>
+		<script type="text/javascript" src="./js/dom.js"></script>
+		<script type="text/javascript" src="./js/XrmGrid.js"></script>		
+
+		<style>
+		body {
+			padding: 5px;
+		}
+		
+		.xrm-grid {
+			max-width: 800px;
+		}
+		
+		textarea {
+			width: 640px;
+			height: 90px;
+		}
+		</style>
+	</head>
+	<body>
+
+		<div id="xrmGrid_1" class="xrm-grid"></div>
+
+		<div id="xrmGrid_2" class="xrm-grid"></div>
+
+		<div id="xrmGrid_3" class="xrm-grid"></div>
+				
+		<div id="xrmGrid_4" class="xrm-grid"></div>
+		
+		<script type="text/javascript">
+			var query = JSON.parse(decodeURI(location.search.substr(6)));
+			query.id = query.id.replace("{", "");
+			query.id = query.id.replace("}", "");
+			query.id = query.id.toLowerCase();
+			console.log(query);
+			
+			var gridSettings1 = {
+				clientUrl: query.clientUrl,
+				entity: "tga_compliancelead",
+				id: query.id,  
+				relationship: "tga_tga_compliancelead_re_account", 
+				relationshipEntity: "account",				
+				title: "Related Accounts",
+				width: "100%",
+				columns: [{name: "accountid", title: "GUID", width: 150},
+					{name: "name", title: "Name", orderby: "asc", width: 250, parse: function(value, grid){
+						return value.toUpperCase();
+				}},
+					{name: "tga_name", title: "System Name", width: 200}
+				],
+				rows: 5,
+				onclick: function(e) {
+					//console.log(e);
+				},
+				selectId: "accountid"
+			};
+
+			dom.on("#xrmGrid_1", "gridRowClick", function(e){
+				console.log(e);
+			});
+			
+			dom.on("#xrmGrid_1", "gridRowDblClick", function(e){
+				console.log(e);
+			});
+			
+			var grid1 = new XrmGrid();
+			grid1.settings(gridSettings1);
+			grid1.open("xrmGrid_1");
+			
+			var gridSettings2 = {
+				clientUrl: query.clientUrl,
+				entity: "tga_compliancelead",
+				id: query.id,  
+				relationship: "tga_tga_compliancelead_re_contact", 
+				relationshipEntity: "contact",
+				title: "Related Contacts",
+				columns: [{name: "contactid", title: "GUID", orderby: "desc", width: 150},
+					{name: "fullname", title: "Fullname", orderby: "asc", width: 250, parse: function(value, grid){
+						return "<span style='color: red;'>" + value.toUpperCase() + "</span>";
+				}},
+					{name: "tga_name", title: "System Name", width: 200},
+					{name: "emailaddress1", title: "Email", width: 175}
+				],
+				rows: 5,
+				onclick: function(e) {
+					console.log(e);
+				},
+				selectId: "contactid"
+			};
+			
+			var grid2 = new XrmGrid();
+			grid2.settings(gridSettings2);
+			grid2.open("xrmGrid_2");	
+
+			var gridSettings3 = {
+				clientUrl: query.clientUrl,
+				entity: "tga_compliancelead",
+				title: "All Compliance Leads",
+				width: "100%",
+				columns: [{name: "tga_complianceleadid", title: "GUID", width: 30},
+					{name: "tga_name", title: "Lead Reference", width: 300},
+					{name: "tga_leadtype", title: "Lead Type", width: 100, type: "optionset", parse: function(v) {
+						return "<span style='color: green;'>&#9742;</span> " + v;
+					}},
+					{name: "createdon", title: "Created", orderby: "desc", type: "date", width: 120},
+					{name: "createdby", title: "Created By", type: "username", width: 120},
+					{name: "tga_complainanttype", title: "Complainant Type", type: "optionset", hidden: true}
+				],
+				rows: 10,
+				ondblclick: function(e) {
+					var row = e.target.parentNode.nodeName == "TR" ? e.target.parentNode : e.target.parentNode.parentNode;
+					console.log(JSON.parse(decodeURI(row.dataset.item)));	
+					window.open(query.clientUrl + "/main.aspx?etn=" + row.dataset.entity + "&id=" + row.dataset.id + "&pagetype=entityrecord");
+				},
+				select: true,
+				selected: true,
+				selectId: "tga_complianceleadid"
+			};
+			
+			var grid3 = new XrmGrid();
+			grid3.settings(gridSettings3);
+			grid3.open("xrmGrid_3");					
+
+			var gridSettings4 = {
+				clientUrl: query.clientUrl,
+				entity: "tga_compliancelead",
+				title: "All Complaint Leads",
+				width: "100%",
+				columns: [{name: "tga_complianceleadid", title: "GUID", width: 30},
+					{name: "tga_name", title: "Lead Reference", width: 300},
+					{name: "tga_leadtype", title: "Lead Type", width: 100, type: "optionset", parse: function(v) {
+						return "<span style='color: green;'>&#9743;</span> " + v;
+					}},
+					{name: "createdon", title: "Created", orderby: "desc", type: "datetime", width: 120},
+					{name: "createdby", title: "Created By", type: "username", width: 120},
+					{name: "tga_complainanttype", title: "Complainant Type", type: "optionset", hidden: true}
+				],
+				rows: 14,
+				ondblclick: function(e) {
+					var row = e.target.parentNode.nodeName == "TR" ? e.target.parentNode : e.target.parentNode.parentNode;
+					console.log(JSON.parse(decodeURI(row.dataset.item)));	
+					window.open(query.clientUrl + "/main.aspx?etn=" + row.dataset.entity + "&id=" + row.dataset.id + "&pagetype=entityrecord");
+				},
+				select: true,
+				selectId: "tga_complianceleadid",
+				filter: "tga_leadtype eq 288580001",
+				flex: true,
+				hidePageNavigation: true
+			};
+			
+			var grid4 = new XrmGrid();
+			grid4.settings(gridSettings4);
+			grid4.open("xrmGrid_4");			
+		</script>		
+	</body>
+<html>

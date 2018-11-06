@@ -1,0 +1,91 @@
+.grid-header {
+	font-weight: bold;
+	margin: 2px 0px;	
+}
+
+.grid-container {
+	margin: 2px 0px;
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #eee;	
+}
+
+.grid-table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.grid-table-header {
+	
+}
+
+.grid-table-header-row {
+	
+}
+
+.grid-table-header-cell, .grid-table-header-cell-select {
+	padding: 6px 8px;
+	border-bottom: 1px solid #eee;	
+	color: #666;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;	
+	cursor: n-resize;	
+}
+
+.grid-table-header-cell-select, .grid-table-cell-select {
+	width: 20px;
+    padding: 0px;
+    margin: 0px;	
+}
+
+.grid-table-body {
+	
+}
+
+.grid-table-row {
+	
+}
+
+.grid-table-row:hover {
+	background-color: #eee;
+}
+
+.grid-table-cell {
+	padding: 6px 6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;	
+}
+
+
+.grid-action-container {
+	padding: 5px 10px;
+}
+
+.grid-status {
+	float: left;
+	width: 45%;
+	padding: 2px;	
+}
+
+.grid-actions {
+	float: right;
+	width: 45%;	
+	padding: 2px;	
+	text-align: right;
+}
+.grid-action {
+	display: inline-block;		
+	color: #444;
+	margin: 0px 6px;
+	cursor: pointer;
+}
+
+.grid-action-inactive {
+	cursor: default;
+	color: #aaa;
+}
+
+.grid-clear-fix {
+	clear: both;
+}

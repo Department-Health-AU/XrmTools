@@ -1,0 +1,65 @@
+<html>
+	<head>
+		<title>Xrm Form Examples</title>
+		<link rel="stylesheet" type="text/css" href="../../_common/styles/fonts.css.aspx">
+		<link rel="stylesheet" type="text/css" href="../../_common/styles/global.css.aspx">	
+		<link rel="stylesheet" type="text/css" href="./css/XrmForm.css">			
+
+		<script type="text/javascript" src="./js/ajax.js"></script>
+		<script type="text/javascript" src="./js/dom.js"></script>
+		<script type="text/javascript" src="./js/XrmForm.js"></script>		
+
+		<style>
+		body {
+			padding: 5px;
+		}
+		
+		.xrm-form {
+			max-width: 800px;
+		}
+		</style>
+	</head>
+	<body>
+
+		<div id="xrmForm_1" class="xrm-form"></div>
+
+		
+		<script type="text/javascript">
+			function tgaGetReferenceNumber(prefix)
+			{
+				var uid = (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase();
+				var year = (new Date()).getFullYear();
+				var ref = prefix + "-" + uid.substr(5) + "/" + year + "*";
+				console.log("REFERENCE: New reference number allocated=" + ref);	
+
+				return ref;
+			}
+		
+			var query = JSON.parse(decodeURI(location.search.substr(6)));
+			query.id = query.id.replace("{", "");
+			query.id = query.id.replace("}", "");
+			query.id = query.id.toLowerCase();
+			console.log(query);
+			
+			var formSettings1 = {
+				clientUrl: query.clientUrl,
+				entity: "tga_compliancelead",
+				id: query.id,  				
+				title: "Test Form",
+				width: "100%",
+				fields: [{name: "tga_referencenumber", title: "Reference", type: "text", parse: function(value, form) {
+						return tgaGetReferenceNumber("CC");
+					} , readOnly: true},
+					{name: "tga_name", title: "Title", label: "Subject", type: "text"},
+					{name: "tga_description", title: "Description", type: "textarea"},
+					{name: "tga_priority", title: "Priority", type: "optionset", optionSet: "tga_casepriority", value: "288580002"},
+					{name: "tga_leadtype", title: "Case Type", type: "optionset", optionSet: "tga_casetype"},
+				],
+			};
+			
+			var form1 = new XrmForm();
+			form1.settings(formSettings1);
+			form1.open("xrmForm_1");
+		</script>		
+	</body>
+<html>
